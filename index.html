@@ -1,14 +1,22 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
-    <head>
-        <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
-        <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
-        <script src="https://raw.githack.com/donmccurdy/aframe-extras/master/dist/aframe-extras.loaders.min.js"></script>
-        <script src="https://raw.githack.com/AR-js-org/studio-backend/master/src/modules/marker/tools/gesture-detector.js"></script>
-        <script src="https://raw.githack.com/AR-js-org/studio-backend/master/src/modules/marker/tools/gesture-handler.js"></script>
-    </head>
+<head>
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
+    <script src="https://raw.githack.com/donmccurdy/aframe-extras/master/dist/aframe-extras.loaders.min.js"></script>
+    <script src="https://raw.githack.com/AR-js-org/studio-backend/master/src/modules/marker/tools/gesture-detector.js"></script>
+    <script src="https://raw.githack.com/AR-js-org/studio-backend/master/src/modules/marker/tools/gesture-handler.js"></script>
+</head>
 
-    <body style="margin: 0; overflow: hidden;">
+<body style="margin: 0; overflow: hidden;">
+    <div id="password-container" style="display: block;">
+        <h2>Enter Password to Activate Camera</h2>
+        <input type="password" id="password-input" placeholder="Enter Password">
+        <br>
+        <button onclick="checkPassword()">Activate Camera</button>
+    </div>
+
+    <div id="ar-container" style="display: none;">
         <a-scene
             vr-mode-ui="enabled: false;"
             loading-screen="enabled: false;"
@@ -47,5 +55,20 @@
 
             <a-entity camera></a-entity>
         </a-scene>
-    </body>
+    </div>
+
+    <script>
+        function checkPassword() {
+            var password = document.getElementById("password-input").value;
+            var correctPassword = "your_password_here"; // 실제 비밀번호로 바꿔주세요.
+
+            if (password === correctPassword) {
+                document.getElementById("password-container").style.display = "none";
+                document.getElementById("ar-container").style.display = "block";
+            } else {
+                alert("Invalid password. Please try again.");
+            }
+        }
+    </script>
+</body>
 </html>
