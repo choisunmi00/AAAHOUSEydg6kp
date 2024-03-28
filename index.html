@@ -41,7 +41,7 @@
                 passwordAttempts++;
                 document.getElementById("passwordAttempts").innerText = "맞힌 횟수: " + passwordAttempts;
                 localStorage.setItem('passwordAttempts', passwordAttempts);
-                localStorage.removeItem('passwordAttempts');
+                //localStorage.removeItem('passwordAttempts');
                 window.location.href = "AR.html";
             } else {
                 alert("암호가 틀렸습니다.");
