@@ -20,36 +20,51 @@
     >
         <a-assets>
             <a-asset-item
-                id="animated-asset"
-                src="assets/asset.gltf"
+                id="animated-asset-A"
+                src="assets/asset_A.gltf"
+            ></a-asset-item>
+            <a-asset-item
+                id="animated-asset-B"
+                src="assets/asset_B.gltf"
             ></a-asset-item>
         </a-assets>
 
         <a-marker
-            id="animated-marker"
+            id="animated-marker-A"
             type="pattern"
             preset="custom"
-            url="assets/marker.patt"
+            url="assets/marker_A.patt"
             raycaster="objects: .clickable"
             emitevents="true"
             cursor="fuse: false; rayOrigin: mouse;"
-            id="markerA"
         >
             <a-entity
-                id="bowser-model"
+                id="bowser-model-A"
                 scale="0.3 0.3 0.3"
                 animation-mixer="loop: repeat"
-                gltf-model="#animated-asset"
+                gltf-model="#animated-asset-A"
                 class="clickable"
                 gesture-handler
             ></a-entity>
-            <a-image
-                    src="assets/asset.png"
-                    scale="1 1 1"
-                    class="clickable"
-                    rotation="-90 0 0"
-                    gesture-handler
-                ></a-image>
+        </a-marker>
+
+        <a-marker
+            id="animated-marker-B"
+            type="pattern"
+            preset="custom"
+            url="assets/marker_B.patt"
+            raycaster="objects: .clickable"
+            emitevents="true"
+            cursor="fuse: false; rayOrigin: mouse;"
+        >
+            <a-entity
+                id="bowser-model-B"
+                scale="0.7128109776830625 0.7128109776830625 0.7128109776830625"
+                animation-mixer="loop: repeat"
+                gltf-model="#animated-asset-B"
+                class="clickable"
+                gesture-handler
+            ></a-entity>
         </a-marker>
 
         <a-entity camera></a-entity>
