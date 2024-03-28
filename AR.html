@@ -58,16 +58,35 @@
                 emitevents="true"
                 cursor="fuse: false; rayOrigin: mouse;"
                 id="markerD"
-            >
-                <a-entity
-                    id="bowser-model-D"
-                    scale="0.7128109776830625 0.7128109776830625 0.7128109776830625"
-                    animation-mixer="loop: repeat"
-                    gltf-model="#animated-asset-D"
-                    class="clickable"
-                    gesture-handler
-                ></a-entity>
-            </a-marker>
+        >
+            <a-entity
+                id="bowser-model-D"
+                scale="0.7128109776830625 0.7128109776830625 0.7128109776830625"
+                animation-mixer="loop: repeat"
+                gltf-model="#animated-asset-D"
+                class="clickable"
+                gesture-handler
+            ></a-entity>
+        </a-marker>
+
+        <a-marker
+                id="animated-marker-A"
+                type="pattern"
+                preset="custom"
+                url="assets/marker_A.patt"
+                raycaster="objects: .clickable"
+                emitevents="true"
+                cursor="fuse: false; rayOrigin: mouse;"
+                id="markerA"
+        >
+            <a-image
+                src="assets/asset_A.png"
+                scale="1 1 1"
+                class="clickable"
+                rotation="-90 0 0"
+                gesture-handler
+            ></a-image>
+        </a-marker>
 
         <a-entity camera></a-entity>
     </a-scene>
