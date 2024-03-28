@@ -30,7 +30,8 @@
     <div id="passwordAttempts"></div>
 
     <script>
-        var passwordAttempts = 0;
+        var passwordAttempts = localStorage.getItem('passwordAttempts') || 0;
+        document.getElementById("passwordAttempts").innerText = "암호 입력 횟수: " + passwordAttempts;
 
         function checkPassword() {
             var password = document.getElementById("password").value;
@@ -38,7 +39,8 @@
 
             if (password === correctPassword) {
                 passwordAttempts++;
-                document.getElementById("passwordAttempts").innerText = "맞춘 사람: " + passwordAttempts + " 명" ;
+                document.getElementById("passwordAttempts").innerText = "암호 입력 횟수: " + passwordAttempts;
+                localStorage.setItem('passwordAttempts', passwordAttempts);
                 window.location.href = "AR.html";
             } else {
                 alert("암호가 틀렸습니다.");
