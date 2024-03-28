@@ -27,12 +27,18 @@
     <br>
     <button onclick="checkPassword()">확인</button>
 
+    <div id="passwordAttempts"></div>
+
     <script>
+        var passwordAttempts = 0;
+
         function checkPassword() {
             var password = document.getElementById("password").value;
             var correctPassword = "240319";
 
             if (password === correctPassword) {
+                passwordAttempts++;
+                document.getElementById("passwordAttempts").innerText = "맞춘 사람: " + passwordAttempts + " 명" ;
                 window.location.href = "AR.html";
             } else {
                 alert("암호가 틀렸습니다.");
