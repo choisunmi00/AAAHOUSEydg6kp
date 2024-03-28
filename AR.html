@@ -23,16 +23,12 @@
                 id="animated-asset-T"
                 src="assets/asset_T.gltf"
             ></a-asset-item>
-        </a-assets>
-        
-        <a-assets>
             <a-asset-item
                  id="animated-asset-D"
                  src="assets/asset_D.gltf"
             ></a-asset-item>
         </a-assets>
 
-        
         <a-marker
             id="animated-marker-T"
             type="pattern"
@@ -41,13 +37,13 @@
             raycaster="objects: .clickable"
             emitevents="true"
             cursor="fuse: false; rayOrigin: mouse;"
-            id="markerA"
+            id="markerT"
         >
             <a-entity
-                id="bowser-model"
+                id="bowser-model-T"
                 scale="0.3 0.3 0.3"
                 animation-mixer="loop: repeat"
-                gltf-model="#animated-asset"
+                gltf-model="#animated-asset-T"
                 class="clickable"
                 gesture-handler
             ></a-entity>
@@ -64,10 +60,10 @@
                 id="markerD"
             >
                 <a-entity
-                    id="bowser-model"
+                    id="bowser-model-D"
                     scale="0.7128109776830625 0.7128109776830625 0.7128109776830625"
                     animation-mixer="loop: repeat"
-                    gltf-model="#animated-asset"
+                    gltf-model="#animated-asset-D"
                     class="clickable"
                     gesture-handler
                 ></a-entity>
