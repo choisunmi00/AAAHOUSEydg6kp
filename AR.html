@@ -8,13 +8,21 @@
     <script src="https://raw.githack.com/AR-js-org/studio-backend/master/src/modules/marker/tools/gesture-detector.js"></script>
     <script src="https://raw.githack.com/AR-js-org/studio-backend/master/src/modules/marker/tools/gesture-handler.js"></script>
     <script>
-        AFRAME.registerComponent('click-listener', {
+        AFRAME.registerComponent('rotatable', {
             init: function() {
-                this.el.addEventListener('click', (e) => {
-                    let rotation = this.el.getAttribute('rotation');
-                    rotation.y += 45;  // 클릭할 때마다 45도씩 회전합니다.
-                    this.el.setAttribute('rotation', rotation);
+                this.el.addEventListener('click', () => {
+                    // 선택된 오브젝트의 'selected' 상태를 토글합니다.
+                    this.el.isSelected = !this.el.isSelected;
                 });
+                this.el.isSelected = false; // 초기 상태는 '선택되지 않음'입니다.
+            },
+            tick: function() {
+                // 오브젝트가 선택되면 회전합니다.
+                if(this.el.isSelected) {
+                    let rotation = this.el.getAttribute('rotation');
+                    rotation.y = (rotation.y + 1) % 360; // 회전 각도를 업데이트합니다.
+                    this.el.setAttribute('rotation', rotation);
+                }
             }
         });
     </script>
@@ -25,95 +33,26 @@
         loading-screen="enabled: false;"
         renderer="logarithmicDepthBuffer: true;"
         arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: false;"
-        id="scene"
         embedded
         gesture-detector
     >
         <a-assets>
-            <a-asset-item
-                id="animated-asset-T"
-                src="assets/asset_T.gltf"
-            ></a-asset-item>
-            <a-asset-item
-                 id="animated-asset-D"
-                 src="assets/asset_D.gltf"
-            ></a-asset-item>
+            <a-asset-item id="animated-asset-T" src="assets/asset_T.gltf"></a-asset-item>
+            <a-asset-item id="animated-asset-D" src="assets/asset_D.gltf"></a-asset-item>
         </a-assets>
 
-        <a-marker
-            type="pattern"
-            preset="custom"
-            url="assets/marker_T.patt"
-            raycaster="objects: .clickable"
-            emitevents="true"
-            cursor="fuse: false; rayOrigin: mouse;"
-            id="markerT"
-        >
-            <a-entity
-                id="bowser-model-T"
-                scale="0.3 0.3 0.3"
-                animation-mixer="loop: repeat"
-                gltf-model="#animated-asset-T"
-                class="clickable"
-                gesture-handler
-                click-listener  <!-- click-listener 컴포넌트를 추가합니다. -->
-            ></a-entity>
-            <a-entity
-                id="bowser-model-D"
-                scale="0.7128109776830625 0.7128109776830625 0.7128109776830625"
-                animation-mixer="loop: repeat"
-                gltf-model="#animated-asset-D"
-                class="clickable"
-                gesture-handler
-                click-listener  <!-- click-listener 컴포넌트를 추가합니다. -->
-            ></a-entity>
-        </a-marker>
-        
-        <a-marker
-                type="pattern"
-                preset="custom"
-                url="assets/marker_D.patt"
-                raycaster="objects: .clickable"
-                emitevents="true"
-                cursor="fuse: false; rayOrigin: mouse;"
-                id="markerD"
-        >
-            <a-entity
-                id="bowser-model-D2"
-                scale="0.4 0.4 0.4"
-                animation-mixer="loop: repeat"
-                gltf-model="#animated-asset-D"
-                class="clickable"
-                gesture-handler
-                click-listener  <!-- click-listener 컴포넌트를 추가합니다. -->
-            ></a-entity>
-            <a-entity
-                id="bowser-model-D3"
-                scale="0.4 0.4 0.4"
-                animation-mixer="loop: repeat"
-                gltf-model="#animated-asset-D"
-                class="clickable"
-                gesture-handler
-                click-listener  <!-- click-listener 컴포넌트를 추가합니다. -->
-            ></a-entity>
+        <a-marker id="animated-marker-T" type="pattern" preset="custom" url="assets/marker_T.patt">
+            <a-entity id="bowser-model-T" scale="0.3 0.3 0.3" gltf-model="#animated-asset-T" class="clickable" rotatable></a-entity>
+            <a-entity id="bowser-model-D" scale="0.7128109776830625 0.7128109776830625 0.7128109776830625" gltf-model="#animated-asset-D" class="clickable" rotatable></a-entity>
         </a-marker>
 
-        <a-marker
-                type="pattern"
-                preset="custom"
-                url="assets/marker_A.patt"
-                raycaster="objects: .clickable"
-                emitevents="true"
-                cursor="fuse: false; rayOrigin: mouse;"
-                id="markerA"
-        >
-            <a-image
-                src="assets/asset_A.png"
-                scale="1 1 1"
-                class="clickable"
-                rotation="-90 0 0"
-                gesture-handler
-            ></a-image>
+        <a-marker id="animated-marker-D" type="pattern" preset="custom" url="assets/marker_D.patt">
+            <a-entity id="bowser-model-D2" scale="0.4 0.4 0.4" gltf-model="#animated-asset-D" class="clickable" rotatable></a-entity>
+            <a-entity id="bowser-model-D3" scale="0.4 0.4 0.4" gltf-model="#animated-asset-D" class="clickable" rotatable></a-entity>
+        </a-marker>
+
+        <a-marker id="animated-marker-A" type="pattern" preset="custom" url="assets/marker_A.patt">
+            <a-image src="assets/asset_A.png" scale="1 1 1" class="clickable" rotation="-90 0 0" gesture-handler rotatable></a-image>
         </a-marker>
 
         <a-entity camera></a-entity>
