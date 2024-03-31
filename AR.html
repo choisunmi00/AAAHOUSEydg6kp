@@ -7,6 +7,17 @@
     <script src="https://raw.githack.com/donmccurdy/aframe-extras/master/dist/aframe-extras.loaders.min.js"></script>
     <script src="https://raw.githack.com/AR-js-org/studio-backend/master/src/modules/marker/tools/gesture-detector.js"></script>
     <script src="https://raw.githack.com/AR-js-org/studio-backend/master/src/modules/marker/tools/gesture-handler.js"></script>
+    <script>
+        AFRAME.registerComponent('click-listener', {
+            init: function() {
+                this.el.addEventListener('click', (e) => {
+                    let rotation = this.el.getAttribute('rotation');
+                    rotation.y += 45;  // 클릭할 때마다 45도씩 회전합니다.
+                    this.el.setAttribute('rotation', rotation);
+                });
+            }
+        });
+    </script>
 </head>
 <body style="margin: 0; overflow: hidden;">
     <a-scene
@@ -30,7 +41,6 @@
         </a-assets>
 
         <a-marker
-            id="animated-marker-T"
             type="pattern"
             preset="custom"
             url="assets/marker_T.patt"
@@ -46,6 +56,7 @@
                 gltf-model="#animated-asset-T"
                 class="clickable"
                 gesture-handler
+                click-listener  <!-- click-listener 컴포넌트를 추가합니다. -->
             ></a-entity>
             <a-entity
                 id="bowser-model-D"
@@ -54,11 +65,11 @@
                 gltf-model="#animated-asset-D"
                 class="clickable"
                 gesture-handler
+                click-listener  <!-- click-listener 컴포넌트를 추가합니다. -->
             ></a-entity>
         </a-marker>
         
         <a-marker
-                id="animated-marker-D"
                 type="pattern"
                 preset="custom"
                 url="assets/marker_D.patt"
@@ -68,25 +79,26 @@
                 id="markerD"
         >
             <a-entity
-                id="bowser-model-D"
+                id="bowser-model-D2"
                 scale="0.4 0.4 0.4"
                 animation-mixer="loop: repeat"
                 gltf-model="#animated-asset-D"
                 class="clickable"
                 gesture-handler
+                click-listener  <!-- click-listener 컴포넌트를 추가합니다. -->
             ></a-entity>
             <a-entity
-                id="bowser-model-D"
+                id="bowser-model-D3"
                 scale="0.4 0.4 0.4"
                 animation-mixer="loop: repeat"
                 gltf-model="#animated-asset-D"
                 class="clickable"
                 gesture-handler
+                click-listener  <!-- click-listener 컴포넌트를 추가합니다. -->
             ></a-entity>
         </a-marker>
 
         <a-marker
-                id="animated-marker-A"
                 type="pattern"
                 preset="custom"
                 url="assets/marker_A.patt"
