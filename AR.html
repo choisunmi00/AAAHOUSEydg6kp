@@ -11,17 +11,16 @@
         AFRAME.registerComponent('rotatable', {
             init: function() {
                 this.el.addEventListener('click', (evt) => {
-                    // 클릭된 오브젝트의 현재 회전 값을 가져옵니다.
                     let rotation = this.el.getAttribute('rotation');
-                    
-                    // Y축을 중심으로 45도 회전합니다.
                     rotation.y = (rotation.y + 45) % 360;
-                    
-                    // 변경된 회전 값으로 오브젝트를 업데이트합니다.
                     this.el.setAttribute('rotation', rotation);
                 });
             }
         });
+
+        function goToNewWebsite() {
+            window.open('https://choisunmi00.github.io/AR_HOUSE_T/', '_blank');
+        }
     </script>
 </head>
 <body style="margin: 0; overflow: hidden;">
@@ -49,7 +48,14 @@
         </a-marker>
 
         <a-marker id="animated-marker-A" type="pattern" preset="custom" url="assets/marker_A.patt">
-            <a-image src="assets/asset_A.png" scale="1 1 1" class="clickable" rotation="-90 0 0" gesture-handler rotatable></a-image>
+            <a-entity
+                geometry="primitive: plane; width: 2; height: 1;"
+                material="color: blue;"
+                position="0 0 -3"
+                text="value: Go to New Website; align: center; color: white;"
+                gesture-handler
+                onclick="goToNewWebsite()"
+            ></a-entity>
         </a-marker>
 
         <a-entity camera></a-entity>
